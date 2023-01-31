@@ -1,14 +1,11 @@
-import '../assets/style/Home.css';
 
-const Home = () => {
-  return (
-    <>
-    <section id="HomeSec">
- 
-      <h1 class="text-xl text-center font-bold">Home Section</h1>
-     </section>
-    </>
- )
-  };
+
+function Home () {
   
-  export default Home;
+  return (
+    <section className="App">
+      Home
+    </section>
+  );   
+}
+export default Home;
