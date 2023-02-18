@@ -18,23 +18,19 @@ nav li  {
     display:inline-flex;
     color:white;
     text-decoration: none;
-    
+    float:left;
     margin:1%;
     font-size: 25px;
 }
 
-nav li:last-child {
-    float:right
-}nav li:first-child {
-    float:left
-}
+
     #toggle_checkbox
     {
         margin:10%;
         display: none;
     }
     
-    label
+    .NVB
     {
         position:absolute;
         top:4%;
@@ -139,3 +135,7 @@ nav li:last-child {
     Link {
         color:red
     }
+    #footer{
+        position:absolute;
+        right:1
+      }

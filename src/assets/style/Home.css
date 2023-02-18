@@ -1,6 +1,26 @@
-#HomeSec{
+    ::-webkit-scrollbar {
+    width: 0px;
+    }
+  
+    .container {
+        display: flex;
+        overflow-x: scroll;
+        width: 100%;
+        margin-left:6%;
+        padding: 20px 0;
+      }
+  .card {
+    flex-shrink: 0;
+    width: 100%;
+    color: "#fff";
+    border:2px blue solid;
+    display: "inline-block";
+    background-color:rgb(31, 41, 55);
+    padding:1%;
+    margin:"20px";
+    width:25%;
+    height: 250px;
+    border-radius: 10px;
+    margin-left: 10px;
     
-}
-h1{
-    color: blue;
-}
+  }

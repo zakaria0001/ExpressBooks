@@ -28,6 +28,10 @@ const LivreSchema = new mongoose.Schema({
     ImageLivre:{
         type:String,
         required:true,
+    },   
+    Etoiles:{
+        type:Number,
+        required:true,
     },
     Categorie :{
         type:String,
