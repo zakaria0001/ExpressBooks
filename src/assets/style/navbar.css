@@ -2,7 +2,6 @@ nav{
     background-color:black;
     margin:0;
     height:80px;
-    
 }
 .dark {
     background-color: #333;
@@ -27,14 +26,16 @@ nav li  {
     #toggle_checkbox
     {
         margin:10%;
+        
         display: none;
     }
     
     .NVB
     {
+        
         position:absolute;
-        top:4%;
-        right:0;
+        top:5%;
+        right:1%;
         display: block;
         width: 116px;
         height: 56px;

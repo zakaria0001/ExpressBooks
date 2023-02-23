@@ -65,7 +65,7 @@ const Books = () => {
         const Cat=categorie.Categorie;
         return (
           <div>
-            <Link  style={spanStyles}class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" to={`Categorie/${Cat}`}>{Cat}</Link>
+            <Link  style={spanStyles}class="max-w-sm p-6 bg-blue border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" to={`Categorie/${Cat}`}>{Cat}</Link>
           </div> 
         );
       })}

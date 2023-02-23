@@ -2,10 +2,20 @@ import axios from 'axios';
 import React,{useState,useEffect} from 'react';
 import {  useLocation, useNavigate } from "react-router-dom";
 import star from '../../assets/images/star.png';
-
+import Box from '@mui/material/Box';
+import StarIcon from '@mui/icons-material/Star';
+import Rating from '@mui/material/Rating';
+import Typography from '@mui/material/Typography';
 const AddBook=()=>{
-  var Rating = require('react-rating');
+  useEffect(() => {
+    document.title = "Ajouter Livre | Admin"
+ }, []);
+  const [value, setValue] = React.useState(2);
   
+
+
+
+
     const navigate = useNavigate();
     const location = useLocation();
     const StyleBox={
@@ -110,7 +120,7 @@ const tableStyle={
     
 
     return (
-        
+      <div className="body">
         <form style={StyleBox} onSubmit={handleSubmit}> 
          <h1 style={Title}>Ajouter Un Livre :</h1>
         <table style={tableStyle} class="border-separate p-8">
@@ -134,11 +144,13 @@ const tableStyle={
               <tr>  
                 <td colspan="5"><input style={inputStyle} type="text" name="ImageLivre" placeholder="ImageLivre" value={ImageLivre} onChange={(e) => setImageLivre(e.target.value)} required/></td>
               </tr>  
-              <tr>
-               <td colspan="2"><input style={inputStyle} type="number" min="0" max="5" name="Etoiles" placeholder="Étoiles" value={Etoiles} onChange={(e) => setEtoiles(e.target.value)} required/></td>
-               <td colspan="2">
+              <tr> 
+            <td colspan="2">
+              <Rating emptyIcon={<StarIcon style={{ opacity: 1 },{color:'grey'}} fontSize="inherit" />} size="large" name="simple-controlled" value={Etoiles} onChange={(e) => setEtoiles(e.target.value)} required />
+             </td>
+            <td colspan="2">
                <select style={inputStyle} type="text" name="Categorie" onChange={(e) => setCategorie(e.target.value)} required >
-                <option selected value="Selectionnez Une Cat" >Selectionnez Une Cat</option>
+                <option selected value="Selectionnez Une Cat" >Selectionnez Une Catégorie</option>
                {dataCat.map(categorie => {
                   
                     const CatNom=categorie.Nom;
@@ -151,7 +163,10 @@ const tableStyle={
                 </td>
             </tr>
             <tr>
-            <Rating />
+         
+     
+     
+     
             </tr>
             <tr>
                 <button type="submit" style={AddB} value="Ajouter">Ajouter</button>
@@ -161,6 +176,7 @@ const tableStyle={
         </table>
 
         </form>
+        </div>
     )
 
     

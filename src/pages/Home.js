@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { useScroll } from "react-use-gesture";
+import { Helmet } from 'react-helmet';
 
 import { Outlet, Link } from "react-router-dom";
 import star from '../assets/images/star.png';
@@ -7,6 +8,10 @@ import '../assets/style/Home.css';
 import { animated, useSpring } from "react-spring";
 
 function Home () {
+  useEffect(() => {
+    document.title = "Home | ExpressBooks"
+ }, []);
+ 
   const [data,setData]=useState([]);
   const getData= async ()=>{
     await fetch('http://localhost:7777/Books'
@@ -31,7 +36,7 @@ function Home () {
   },[])
   const DistinctCategories = [];
   
-  const uniqueEmployees = data.filter(element => {
+  const uniqueCategories = data.filter(element => {
   const isDuplicate = DistinctCategories.includes(element.Categorie);
 
   if (!isDuplicate) {
@@ -52,37 +57,51 @@ function Home () {
   const spanStylesList = {
     color: "black",
     borderColor: "#00f",
-    display: "inline-block",
-    
-    
-    marginBottom:"4%",
+    display: "block",
     borderRadius:"0px",
+    textAlign:"left",
     width:"30%",
-    marginBottom:'10px',
-    
+    margin:"0% 35%",
   };
   const StarStyle={
     display:"inline-block",
     width: "15px",
   }
+  const StarStyleSearch={
+    display:"inline-flex",
+    float:"right",
+  }
  
   const SearchBar={
-    margin:'3%',
-    padding:'1%',
-    width:'30%',
-    borderTopLeftRadius:'10px',
-    borderTopRightRadius:'10px',
+    margin:"0% 0% -2%",
+    padding:'3%',
+    width:'100%',
+    borderRadius:'10px',
+   
     outline:'none',
     color:'black'
   }
   const SearchSection={
     width:'100%',
+    textAlign:'center',
+    marginBottom:"7%",
+    marginTop:"2%",
+
     
   }
   const StarContainer={
     width: "100%",
     marginBottom:"10px",
     height:"50px"
+
+  }
+  const SearchB={
+    display:"inline-flex",
+    width:"30%",
+    backgroundColor:"white",
+    color:"red",
+    borderTopLeftRadius:'10px',
+    borderTopRightRadius:'10px',
 
   }
   
@@ -124,7 +143,7 @@ function Home () {
   
 
   const handleChange = event => {
-    if(event.target.value!=null){
+    if(event.target.value!=""){
     fetch('http://localhost:7777/Books/Search/'+event.target.value
     ,{
       headers : { 
@@ -137,21 +156,21 @@ function Home () {
         console.log(response);
         return response.json();
       }).then(function(Bookss) {
-        console.log(Bookss);
         setMessage(Bookss);
       }).catch();
-    console.log('value is:', event.target.value);
   }else{
     console.log('value is:', event.target.value);
   }
-
+        
   };
   
     
   return (
+    
     <React.Fragment>
     <section className="App">
       <div style={SearchSection}>
+        <div style={SearchB}>
         <input
         placeholder="Cherchez Votre Livre Préferé "
         style={SearchBar}
@@ -161,9 +180,11 @@ function Home () {
           onChange={handleChange}
           
         />
-      </div>
-      
-      {  Message.map((items)=>{
+    
+        </div>
+        
+       
+     {  Message.map((items)=>{
           if(Message!='null'){
           const { _id,Nom, Description, Auteur,Categorie,Etoiles} = items;
           const Stars = []
@@ -172,18 +193,26 @@ function Home () {
               <img style={StarStyle} src={star}/>
             )
           }
+          
                   
             return(
             <React.Fragment>
            
                 <div style={spanStylesList} id="dropdownHover" class="z-10 hidden bg-white divide-y divide-black-100 rounded-lg shadow w-44 dark:bg-black-700">
-    <ul class="py-2 text-sm text-black-700 dark:text-black-200" aria-labelledby="dropdownHoverButton">
-      <li>
-        <Link to={`/Books/${_id}`} class="block px-4 py-2 hover:bg-black-100 dark:hover:bg-black-600 dark:hover:text-black text-black-900">{Nom}</Link>
-      </li>
-
-    </ul>
-</div>
+                  <ul  class="py-2 text-sm text-black-700 dark:text-black-200" aria-labelledby="dropdownHoverButton">
+                    <li className="dropD">
+                      <Link to={`/Books/${_id}`} class="block px-4 py-2 hover:bg-black-100 dark:hover:bg-black-600 dark:hover:text-black text-black-900">
+                      <span>{Nom}</span>
+                      <br/>
+                      <span>{Auteur}</span>
+                      <section style={StarStyleSearch}>
+                      {Stars}
+                      </section>
+                      </Link>
+                    </li>
+                    
+                  </ul>
+                </div>
             </React.Fragment>
             );
           }else{
@@ -193,6 +222,10 @@ function Home () {
 
             })
       } 
+
+      </div>
+      
+      
 <h1 style={Title}>Livres Populaires :</h1>
 <section className="container" {...bind()}>
        {  data.map((item)=>{
@@ -204,11 +237,11 @@ function Home () {
                 <img style={StarStyle} src={star}/>
               )
             }
-            if(Etoiles>=0){
+            if(Etoiles>=3){
               return(
               <React.Fragment>
               <animated.div
-              class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+              class="max-w-sm p-6 border bg-tahiti-700 w-80 border-gray-0 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
             className="card"
             style={{...style}}>
                       <a href="#">
@@ -218,9 +251,7 @@ function Home () {
                       <section style={StarContainer}>
                       {Stars}
                       </section>
-                     
-                     
-                      <Link class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" to={`/Books/${_id}`}>Plus De Détails</Link>
+                      <Link class="inline-flex items-center px-3 py-2  text-sm font-medium text-center text-white  rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" to={`/Books/${_id}`}>Plus De Détails</Link>
                   </animated.div>
               </React.Fragment>
               )
@@ -234,15 +265,22 @@ function Home () {
    </section>
    <React.Fragment>
             
-          <div>
-      {uniqueEmployees.map(categorie => {
+          <div> 
+      {uniqueCategories.map(categorie => {
         const Cat=categorie.Categorie;
+       
+        const movies = data.filter(item => item.Categorie === Cat);
+        const moviesCount = movies.length;
+
+     
         return (
-          <div>
+          <React.Fragment>
+          <h1 style={Title}> {(Cat==null)?"Autre":Cat} ({moviesCount}) :  <Link style={More} to={`/Books/Categorie/${Cat}`}> Voir Plus ..</Link>  </h1>
+
+          <div className="container">
             
-            <h1 style={Title}> {(Cat==null)?"Autre":Cat} :  <Link style={More} to={`/Books/Categorie/${Cat}`}>Voir Plus ..</Link>  </h1>
             
-           {  data.map((item,index)=>{
+           {  data.slice(data.length - 7).map((item,index)=>{
             const { _id,Nom, Description, Auteur,Categorie,Etoiles} = item;
             const Stars = []
             for (var i = 0; i < Etoiles; i++) {
@@ -251,9 +289,10 @@ function Home () {
               )
             }
             if(Categorie==Cat ){
+            
               return(
               <React.Fragment>
-                 <div style={spanStyles} class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                 <div style={spanStyles} className="card" class="max-w-sm p-6 bg-blue border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                       <Link to={`/Books/${_id}`}>
                           <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"> {Nom} | {Auteur}</h5>
                       </Link>
@@ -261,7 +300,7 @@ function Home () {
                       <section style={StarContainer}>
                       {(Stars==0)?"Aucune Etoile":Stars}
                       </section>
-                      <Link class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" to={`/Books/${_id}`}>Plus De Détails</Link>
+                      <Link class="inline-flex items-center px-3 py-2 text-sm font-medium text-center bg-black text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" to={`/Books/${_id}`}>Plus De Détails</Link>
                   </div>
               </React.Fragment>
               )
@@ -271,10 +310,11 @@ function Home () {
             
             })}  
           </div>
-          
+          </React.Fragment>
         );
       })}
-    </div>
+      
+    </div> 
     </React.Fragment>
    </React.Fragment>
    

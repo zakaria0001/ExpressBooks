@@ -1,12 +1,13 @@
 import {Route, Link, Routes, useParams} from 'react-router-dom';
 import React,{useState,useEffect} from 'react';
+import DefaultUser from '../../assets/images/DefaultUser.png';
 
 const ProfilDetail = () => {
     const Title={
         fontSize: 25
       }
       const StyleBox={
-        margin:'5% 20%',
+        margin:'10% 20%',
         padding:'2% 0%',
         backgroundColor:'black',
         borderRadius:'30px',
@@ -20,7 +21,9 @@ const ProfilDetail = () => {
         width:'30%'
       }
       const ProfilePic={
-        textAlign:'center'
+        textAlign:'center',
+        margin:'-15% 15%',
+        width:'15%'
       }
       const inputStyle={
         color:'#5B8FB9',
@@ -29,14 +32,13 @@ const ProfilDetail = () => {
         height:'40px',
         borderBottom:'1px solid #5B8FB9',
         backgroundColor:'black',
-        
         fontSize:'20px',
         margin:'10px 10px 0px 0px',
         display:'inline-flex'
       }
       const tableStyle={
         width:'100%',
-        margin:'5% 25%'
+        margin:'0% 25%'
       }
     const params = useParams();
     const [data,setData]=useState([]);
@@ -67,15 +69,15 @@ const ProfilDetail = () => {
     return(
         <React.Fragment>
       
-        <div>
+        <div className="body">
         {data.map((item) => {
             const { _id,Nom,Prenom,Email,MotDePasse,Photo} = item;
             return (
              
               <section style={StyleBox}>
               <table style={tableStyle}>
-                <tr style={ProfilePic}>
-                    <td><img src={Photo} alt="profile Pic" /></td>
+                <tr >
+                    <td ><img  style={ProfilePic} src={DefaultUser} alt="profile Pic" /></td>
                 </tr>
                 <tr>
                     <td> <input style={inputStyle} defaultValue={Nom}/></td>

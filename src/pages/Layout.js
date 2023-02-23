@@ -30,6 +30,7 @@ useEffect(() => {
     textAlign:'center',
    
   }
+  
 
 
   return (
@@ -38,8 +39,7 @@ useEffect(() => {
     
     <section className={`App ${theme}`}>
     <nav>
-      <li>ExpressBooks</li>
-      <li><Link style={linkStyle} to="/">Home</Link></li>
+      <li><Link style={linkStyle} to="/">ExpressBooks</Link></li>
       <li><Link style={linkStyle} to="/Books">Livres</Link></li>
       <li><Link style={linkStyle} to="/About">A Propos De Nous</Link></li>
       <li><Link style={linkStyle} to="/Contact">Contact</Link></li>

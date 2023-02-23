@@ -74,7 +74,7 @@ const [data,setData]=useState([]);
           return (
             <section style={Books}>
               <div style={spanStyles} class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                              <Link to={`/Books/${_id}`}>
+                              <Link to={`/Admin/Books/${_id}`}>
                                   <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"> {Nom} | {Auteur}</h5>
                               </Link>
                               <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{Description}</p>

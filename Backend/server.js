@@ -8,7 +8,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const LivreRouter=require("./Routes/LivreRoutes");
 const CategorieRouter=require("./Routes/CategorieRoutes");
-const AdminRouter=require("./Routes/AdminRoutes");
+const AdminRouter=require("./Routes/AdminRoutes");  
 
 app.use(cors());
 app.use(express.urlencoded({extended:true}))

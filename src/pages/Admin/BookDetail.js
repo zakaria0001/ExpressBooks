@@ -108,7 +108,8 @@ const tableStyle={
   if(_id===params.id){
   return (
    
-    <section>
+    <section className="body">
+
       <form onSubmit={handleSubmit}>
                     
       <table className='table'>
