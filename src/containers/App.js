@@ -6,12 +6,13 @@ import Home from "../pages/Home"
 import Books from "../pages/Books"
 import Contact from "../pages/Contact"
 import ErrorPage from "../pages/ErrorPage"
+import Admin from "../pages/Admin/Admin"
 import Layout from "../pages/Layout"
 function App() {
   return (
-
     <BrowserRouter>
     <Routes>
+    <Route path="Admin" element={<Admin />} />
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="About" element={<About />} />
