@@ -1,8 +1,7 @@
 nav{
-    background-color:black;
+    background-color:#BFB6B6;
     margin:0;
     height:80px;
-    
 }
 .dark {
     background-color: #333;
@@ -18,27 +17,32 @@ nav li  {
     display:inline-flex;
     color:white;
     text-decoration: none;
-    
+    float:left;
+    margin:1%;
+    font-size: 25px;
+}nav li:nth-last-child  {
+    display:inline-flex;
+    color:white;
+    text-decoration: none;
+    float:right;
     margin:1%;
     font-size: 25px;
 }
 
-nav li:last-child {
-    float:right
-}nav li:first-child {
-    float:left
-}
+
+
     #toggle_checkbox
     {
         margin:10%;
         display: none;
     }
     
-    label
+    .NVB
     {
+        
         position:absolute;
-        top:4%;
-        right:0;
+        top:5%;
+        right:1%;
         display: block;
         width: 116px;
         height: 56px;
@@ -139,3 +143,7 @@ nav li:last-child {
     Link {
         color:red
     }
+    #footer{
+        position:absolute;
+        right:1
+      }
