@@ -20,6 +20,7 @@ module.exports = {
         800: '#155e75',
         900: '#164e63',
       },
+      'red':'#FF0000',
       'green': '#13ce66',
        'indigo': {
         50:'#eef2ff',
@@ -33,6 +34,7 @@ module.exports = {
         800:'#3730a3',
         900:'#312e81',
       },
+      'brown':'#beb6b6',
       'yellow': '#ffc82c',
       'gray-dark': '#273444',
       'gray': '#8492a6',

@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import { useScroll } from "react-use-gesture";
 import { Helmet } from 'react-helmet';
+import DefaultBook from '../assets/images/DefaultBook.jpg';
 
 import { Outlet, Link } from "react-router-dom";
 import star from '../assets/images/star.png';
@@ -58,8 +59,9 @@ function Home () {
     color: "black",
     borderColor: "#00f",
     display: "block",
-    borderRadius:"0px",
-    textAlign:"left",
+    backgroundColor:"white",
+borderRadius:"0px",
+    display:"inline-flex",
     width:"30%",
     margin:"0% 35%",
   };
@@ -114,7 +116,15 @@ function Home () {
    color: "black",
    textDecoration: "underline",
   }
+  const imgStyle={
+   width:"10px"
+  }
+const rightbookinfo={
+  position:"relative",
+  float:'right',
 
+
+}
   const [style, set] = useSpring(() => ({
     from: {
       transform: "rotateY(0deg)"
@@ -168,8 +178,9 @@ function Home () {
   return (
     
     <React.Fragment>
-    <section className="App">
-      <div style={SearchSection}>
+    
+     <section className="home">
+     <div style={SearchSection}>
         <div style={SearchB}>
         <input
         placeholder="Cherchez Votre Livre Préferé "
@@ -177,9 +188,7 @@ function Home () {
           type="text"
           id="message"
           name="message"
-          onChange={handleChange}
-          
-        />
+          onChange={handleChange}/>
     
         </div>
         
@@ -202,12 +211,19 @@ function Home () {
                   <ul  class="py-2 text-sm text-black-700 dark:text-black-200" aria-labelledby="dropdownHoverButton">
                     <li className="dropD">
                       <Link to={`/Books/${_id}`} class="block px-4 py-2 hover:bg-black-100 dark:hover:bg-black-600 dark:hover:text-black text-black-900">
-                      <span>{Nom}</span>
-                      <br/>
-                      <span>{Auteur}</span>
-                      <section style={StarStyleSearch}>
-                      {Stars}
-                      </section>
+                      
+                      <section class="container">
+   
+    <article>
+     <h1>{Nom}</h1> 
+     <h2>{Auteur}</h2>
+
+    </article>
+    <section className="star">{Stars}</section>
+
+  </section>
+  
+
                       </Link>
                     </li>
                     
@@ -225,9 +241,17 @@ function Home () {
 
       </div>
       
+      <div className="book-banner">
+        <div className='book-banner-title'>
+        <h1  class="mt-3">Best-Sellers</h1>
+      <a href='/Books'><p className="see-more">(Voir Plus)</p></a>
+      </div>
+          
       
-<h1 style={Title}>Livres Populaires :</h1>
-<section className="container" {...bind()}>
+      
+      
+<div className="book-banner-content">
+
        {  data.map((item)=>{
 
             const { _id,Nom, Description, Auteur,Categorie,Etoiles} = item;
@@ -240,19 +264,14 @@ function Home () {
             if(Etoiles>=3){
               return(
               <React.Fragment>
-              <animated.div
-              class="max-w-sm p-6 border bg-tahiti-700 w-80 border-gray-0 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-            className="card"
-            style={{...style}}>
-                      <a href="#">
-                          <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"> {Nom} | {Auteur}</h5>
-                      </a>
-                      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{Description}</p>
-                      <section style={StarContainer}>
-                      {Stars}
-                      </section>
-                      <Link class="inline-flex items-center px-3 py-2  text-sm font-medium text-center text-white  rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" to={`/Books/${_id}`}>Plus De Détails</Link>
-                  </animated.div>
+              <div className="SingleBook">
+              <ul key={_id}>
+                <img src={DefaultBook}  width={'100px'} height={'150px'} />
+                <div className="book-info">
+                <a href={`/Books/${_id}`} className="button">{Nom}</a> <br/>
+                </div>
+                </ul>
+                </div>
               </React.Fragment>
               )
             } 
@@ -260,62 +279,11 @@ function Home () {
             
            
        })}
+       </div>
+       </div>
     </section>
    
-   </section>
-   <React.Fragment>
-            
-          <div> 
-      {uniqueCategories.map(categorie => {
-        const Cat=categorie.Categorie;
-       
-        const movies = data.filter(item => item.Categorie === Cat);
-        const moviesCount = movies.length;
-
-     
-        return (
-          <React.Fragment>
-          <h1 style={Title}> {(Cat==null)?"Autre":Cat} ({moviesCount}) :  <Link style={More} to={`/Books/Categorie/${Cat}`}> Voir Plus ..</Link>  </h1>
-
-          <div className="container">
-            
-            
-           {  data.slice(data.length - 7).map((item,index)=>{
-            const { _id,Nom, Description, Auteur,Categorie,Etoiles} = item;
-            const Stars = []
-            for (var i = 0; i < Etoiles; i++) {
-              Stars.push(
-                <img style={StarStyle} src={star}/>
-              )
-            }
-            if(Categorie==Cat ){
-            
-              return(
-              <React.Fragment>
-                 <div style={spanStyles} className="card" class="max-w-sm p-6 bg-blue border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                      <Link to={`/Books/${_id}`}>
-                          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"> {Nom} | {Auteur}</h5>
-                      </Link>
-                      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{Description}</p>
-                      <section style={StarContainer}>
-                      {(Stars==0)?"Aucune Etoile":Stars}
-                      </section>
-                      <Link class="inline-flex items-center px-3 py-2 text-sm font-medium text-center bg-black text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" to={`/Books/${_id}`}>Plus De Détails</Link>
-                  </div>
-              </React.Fragment>
-              )
-            } 
-            
-            
-            
-            })}  
-          </div>
-          </React.Fragment>
-        );
-      })}
-      
-    </div> 
-    </React.Fragment>
+   
    </React.Fragment>
    
   );

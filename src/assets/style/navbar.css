@@ -1,5 +1,5 @@
 nav{
-    background-color:black;
+    background-color:#BFB6B6;
     margin:0;
     height:80px;
 }
@@ -20,13 +20,20 @@ nav li  {
     float:left;
     margin:1%;
     font-size: 25px;
+}nav li:nth-last-child  {
+    display:inline-flex;
+    color:white;
+    text-decoration: none;
+    float:right;
+    margin:1%;
+    font-size: 25px;
 }
+
 
 
     #toggle_checkbox
     {
         margin:10%;
-        
         display: none;
     }
     

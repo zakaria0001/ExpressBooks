@@ -29,10 +29,10 @@ const [data,setData]=useState([]);
   },[])
   const spanStyles = {
     color: "#fff",
-    borderColor: "#00f",
     display: "inline-block",
     margin:"20px",
     width:"100%",
+    height:"250px"
     
   };
 
@@ -58,8 +58,9 @@ const [data,setData]=useState([]);
 
     return(
     <React.Fragment>
-      <h1 style={Title}>{SelectedCat}</h1>
-    <div>
+        <div class="bg-[#bfb6b6c0]">
+      <h1 style={Title}>{SelectedCat} : </h1>
+
 {data.map((item) => {
    
   const { _id,Nom, Description, Auteur,Categorie,ISBN,Etoiles} = item;
@@ -73,16 +74,16 @@ const [data,setData]=useState([]);
   return (
    
     <section style={Books}>
-      <div style={spanStyles} class="max-w-sm p-6 bg-blue border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                      <Link to={`/Books/${_id}`}>
-                          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"> {Nom} | {Auteur}</h5>
+    <div style={spanStyles} className="card" class="max-w-sm p-6 bg-white border h-100  text-brown rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                      <Link to={`/Books/${_id}`} class="text-red">
+                          <h5 class="mb-2  text-2xl font-bold tracking-tight text-brown"> {Nom} | {Auteur}</h5>
                       </Link>
-                      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{Description}</p>
-                      <section style={StarContainer}>
+                      <p class="mb-3 font-normal text-gray-700 text-brown dark:text-gray-400">{Description}</p>
+                      <section style={StarContainer} class="text-black">
                       {(Stars==0)?"Aucune Etoile":Stars}
                       </section>
-                      <Link class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" to={`/Books/${_id}`}>Plus De Détails</Link>
-    </div>
+                      <Link class="inline-flex items-center px-8 py-3 text-sm font-medium text-center bg-black  text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" to={`/Books/${_id}`}>Plus De Détails</Link>
+                  </div>
     </section>
     
   );

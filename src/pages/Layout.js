@@ -1,5 +1,6 @@
 import { Outlet, Link } from "react-router-dom";
 import '../assets/style/navbar.css';
+import Logo from '../assets/logo/smalllogo.png';
 import React, { useState, useEffect } from 'react';
 
 
@@ -30,7 +31,10 @@ useEffect(() => {
     textAlign:'center',
    
   }
-  
+  const imgStyle={
+    width:'40px' , 
+    height:'fit-content'
+  }
 
 
   return (
@@ -39,21 +43,16 @@ useEffect(() => {
     
     <section className={`App ${theme}`}>
     <nav>
-      <li><Link style={linkStyle} to="/">ExpressBooks</Link></li>
+      <li><Link style={linkStyle} to="/"><img style={imgStyle} src={Logo}/></Link></li>
       <li><Link style={linkStyle} to="/Books">Livres</Link></li>
       <li><Link style={linkStyle} to="/About">A Propos De Nous</Link></li>
       <li><Link style={linkStyle} to="/Contact">Contact</Link></li>
 
-    <li>
-      <input type="checkbox" onChange={toggleTheme} id="toggle_checkbox"/>
-
-        <label class="NVB" for="toggle_checkbox">
-          <div id="star">
-            <div class="star" id="star-1">★</div>
-            <div class="star" id="star-2">★</div>
-          </div>
-          <div id="moon"></div>
-        </label>      
+    <li classame="floatRights">
+      <label class="switch">
+        <input type="checkbox" onChange={toggleTheme}/>
+        <span class="slider"></span>
+        </label>     
      </li>
     </nav>
     </section>
